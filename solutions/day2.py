@@ -5,7 +5,7 @@
 import re
 
 from dataclasses import dataclass
-
+from functools import reduce
 
 @dataclass
 class Policy:
@@ -31,5 +31,5 @@ def test_policy2(x: Policy):
 
 lines = open("../inputs/day2.txt").readlines()
 
-print(len([y for y in [test_policy(split(x)) for x in lines] if y]))
-print(len([y for y in [test_policy2(split(x)) for x in lines] if y]))
+print(sum([test_policy(x) for x in map(split, lines)]))
+print(sum([test_policy2(x) for x in map(split, lines)]))
