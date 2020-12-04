@@ -1,6 +1,6 @@
-from contextlib import contextmanager
-
 import pytest
+
+from contextlib import nullcontext as does_not_raise
 
 from solutions.day4 import split_passports, calc_valid_passports, validate_range, validate_eye_color, \
     validate_hair_color, validate_height
@@ -12,11 +12,6 @@ def test_split_passports():
 
 def test_calc_valid_passports():
     assert calc_valid_passports("../inputs/day4.txt") == 153
-
-
-@contextmanager
-def does_not_raise():
-    yield
 
 
 @pytest.mark.parametrize(
