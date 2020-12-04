@@ -56,7 +56,7 @@ class Passport:
 
 
 def transform_to_json(passport_txt):
-    json_passport = "{" + re.sub("([a-z]{3}):([a-z0-9#]+)", r'"\1": "\2",', passport_txt.replace(r"\n", " ")) + "}"
+    json_passport = "{" + re.sub("([a-z]{3}):([a-z0-9#]+)", r'"\1": "\2",', passport_txt) + "}"
     return json_passport.replace(",}", "}")
 
 
@@ -72,7 +72,9 @@ def try_parse_passport(s):
         return None
 
 
-raw = open("../inputs/day4.txt").read()
-json_passports = [transform_to_json(passport) for passport in split_passports(raw)]
+def calc_valid_passports(path: str):
+    raw = open(path).read()
+    json_passports = [transform_to_json(passport) for passport in split_passports(raw)]
+    return sum(1 for passport in [try_parse_passport(s) for s in json_passports] if passport is not None)
 
-print(sum(1 for passport in [try_parse_passport(s) for s in json_passports] if passport is not None))
+
